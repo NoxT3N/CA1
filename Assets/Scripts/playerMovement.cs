@@ -36,16 +36,17 @@ public class playerMovement : MonoBehaviour{
 
     private void Jump(){
         body.velocity = new Vector2(body.velocity.x, jumpHeight);
-        //anim.SetTrigger("Jump");
         anim.SetBool("Jump", true);
-        anim.SetBool("onGround",false);
+        anim.SetBool("Grounded",false);
         onGround = false;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("Ground")){
             onGround = true;
-            anim.SetBool("onGround",true);
+            anim.SetBool("Jump", false);
+            anim.SetBool("Grounded",true);
+            
         }
     }
 
