@@ -21,24 +21,38 @@ public class playerMovement : MonoBehaviour{
     {   
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         body.velocity = new Vector2(horizontalInput*speed, body.velocity.y);
-        
+        anim.SetBool("Walk", horizontalInput !=0);
+
         if(Input.GetKey(KeyCode.Space) && onGround){
             Jump();
         }
-        
 
-        anim.SetBool("walk", horizontalInput !=0);
+        if((horizontalInput>0&& !facingRight)||(horizontalInput<0&&facingRight))
+        {
+            Flip();
+        }
 
     }
 
     private void Jump(){
         body.velocity = new Vector2(body.velocity.x, jumpHeight);
-        anim.SetTrigger("jump");
+        //anim.SetTrigger("Jump");
+        anim.SetBool("Jump", true);
+        anim.SetBool("onGround",false);
         onGround = false;
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Ground"))
-        onGround = true;
+        if(other.gameObject.CompareTag("Ground")){
+            onGround = true;
+            anim.SetBool("onGround",true);
+        }
+    }
+
+    private void Flip(){
+        Vector3 currentScale = gameObject.transform.localScale; 
+        currentScale.x *= -1;
+        gameObject.transform.localScale = currentScale; 
+        facingRight = !facingRight; 
     }
 }
