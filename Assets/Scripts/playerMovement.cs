@@ -10,9 +10,10 @@ public class playerMovement : MonoBehaviour{
     private Animator anim;
     private bool facingRight = true;    
     private bool onGround;
+
     
-    private void Awake(){ //method called when the unity scene is loaded
-        //refrences the components attached to the game object
+    
+    private void Awake(){ 
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -27,7 +28,7 @@ public class playerMovement : MonoBehaviour{
             Jump();
         }
 
-        if((horizontalInput>0&& !facingRight)||(horizontalInput<0&&facingRight))
+        if((horizontalInput>0 && !facingRight)||(horizontalInput<0 && facingRight))
         {
             Flip();
         }
@@ -42,7 +43,7 @@ public class playerMovement : MonoBehaviour{
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.CompareTag("Ground")){
+        if(other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("Wall")){
             onGround = true;
             anim.SetBool("Jump", false);
             anim.SetBool("Grounded",true);
