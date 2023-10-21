@@ -6,12 +6,13 @@ using UnityEngine;
 public class playerColourChanger : MonoBehaviour
 {
     [HideInInspector]public Color pColour;
-    private SpriteRenderer playerRender;
+    [HideInInspector]public SpriteRenderer playerRender;
+    private GameObject[] coins; 
 
     void Awake(){
         playerRender = GetComponent<SpriteRenderer>();
         pColour = playerRender.color;    
-
+        coins = GameObject.FindGameObjectsWithTag("Coin");
     }
 
     //when player enters a trigger collider it checks if that collider is tagged as coin
@@ -24,7 +25,12 @@ public class playerColourChanger : MonoBehaviour
             Color coinColour = other.GetComponent<SpriteRenderer>().color;
             if(pColour != coinColour){
                 playerRender.material.color = coinColour;
-                Destroy(other.gameObject);
+                //Destroy(other.gameObject);
+                foreach(GameObject coin in coins){
+                    if(coin.GetComponent<SpriteRenderer>().color == coinColour){
+                        Destroy(coin);
+                    }
+                }
             }
             
         }

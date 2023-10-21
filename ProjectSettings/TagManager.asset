@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Wall
   - Coin
+  - YellowCoin
+  - CoinSpawner
+  - Coin Manager
   layers:
   - Default
   - TransparentFX
