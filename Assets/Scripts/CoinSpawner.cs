@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class CoinSpawner : MonoBehaviour
 {
-    [SerializeField]private GameObject coins;
+    private GameObject[] coins = CoinManager.instance.coins;
     [SerializeField]private Transform[] spawnPoints;
+    void Update(){
+        
+    }
     
-    void spawnCoin(GameObject coin){
-        if(coin){
-
-        }
+    private void spawnCoin(){
+        for()
     }
 }

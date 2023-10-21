@@ -10,10 +10,14 @@ public class CoinManager : MonoBehaviour
     public static CoinManager instance;
 
     [Header("Coin Colour States")]
+    //true = currently in scene
+    //false = not in scene, will need to be respawned
     public bool whiteCoin = true;
     public bool redCoin = true;
     public bool yellowCoin = true;
     public bool blueCoin = true;
+
+    [HideInInspector] public GameObject[]coins;
 
     void Awake(){
         if(instance == null){
@@ -24,11 +28,14 @@ public class CoinManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        coins = GameObject.FindGameObjectsWithTag("Coin");
     }
 
-    public bool getCoin(String coinName){
+    public bool getCoin(string coinName){
         coinName = coinName.ToLower();
         switch(coinName){
+
             case "white":
                 return this.whiteCoin;
             case "red":
@@ -43,7 +50,8 @@ public class CoinManager : MonoBehaviour
     }
 
     public void setCoin(String coinName,bool state){
-         switch(coinName){
+        string coin = coinName;
+         switch(coin){
             case "white":
                 this.whiteCoin = state;
             break;
