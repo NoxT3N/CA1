@@ -19,18 +19,27 @@ public class playerColourChanger : MonoBehaviour
     //if yes then it gets the colour of the coin through its sprite render component
     //and check if it's the same with the player's colour
     //if not then the player's colour is changed to the coins colour 
-    //through the sprite renderer component and the coin gets detroyed 
+    //through the sprite renderer component and the coin gets detroyed
+
+    //UPDATE: instead of destroying the coin now ther's a loop that goes thorugh each coin in the game and disable's it if it's the same colour
+
     private void OnTriggerEnter2D(Collider2D other){
+        for(int i = 0; i < GameObject.Find("Coins").transform.childCount; i++){
+            //Because Find(parentName) checks disabled objects by default I used it to reenablethe coins
+            GameObject.Find("Coins").transform.GetChild(i).gameObject.SetActive(true);
+        }
+
         if(other.gameObject.CompareTag("Coin")){
             Color coinColour = other.GetComponent<SpriteRenderer>().color;
-            if(pColour != coinColour){
-                playerRender.material.color = coinColour;
+            if(pColour != coinColour){  
                 //Destroy(other.gameObject);
                 foreach(GameObject coin in coins){
                     if(coin.GetComponent<SpriteRenderer>().color == coinColour){
-                        Destroy(coin);
+                        coin.SetActive(false);
                     }
+                    
                 }
+                playerRender.material.color = coinColour;
             }
             
         }
