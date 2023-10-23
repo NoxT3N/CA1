@@ -10,6 +10,8 @@ TagManager:
   - YellowCoin
   - CoinSpawner
   - Coin Manager
+  - Obstacle
+  - Spawn Point
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Ground
   - Wall
   - Coin
-  - 
+  - Obstacle
   - 
   - 
   - 

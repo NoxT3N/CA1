@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,6 +12,8 @@ public class playerMovement : MonoBehaviour{
     private Animator anim;
     private bool facingRight = true;    
     private bool onGround;
+
+    private Color pColour;
 
     private playerColourChanger pColourChanger;
 
@@ -39,6 +42,10 @@ public class playerMovement : MonoBehaviour{
 
     }
 
+    void Update(){
+        pColour = pColourChanger.pColour;
+    }
+
     private void Jump(){
         body.velocity = new Vector2(body.velocity.x, jumpHeight);
         anim.SetBool("Jump", true);
@@ -56,12 +63,25 @@ public class playerMovement : MonoBehaviour{
     }
 
     private void OnTriggerEnter2D(Collider2D other){
-        Vector3Int position = other.gameObject.GetComponent<Tilemap>().WorldToCell(transform.position);
-
-        if(other.GetComponent<Tilemap>().GetColor(position) == pColourChanger.pColour){
-
-        }
-    }
+        if(other.gameObject.CompareTag("Obstacle")){
+            //Debug.Log("I see you");
+            //gets tilemap collider position and converts it into cell position
+            //Vector3Int cellPos = other.GetComponent<Tilemap>().WorldToCell(transform.position);
+            //Color tmapColor =  other.GetComponent<Tilemap>().GetColor(cellPos);
+            Color tmapColor = other.gameObject.GetComponent<Tilemap>().color;
+             
+            /*if(tmap.GetColor(cellPos) != other.gameObject.GetComponent<playerColourChanger>().pColour){
+                Debug.Log("Working so far");
+                other.transform.position = GameManager.instance.getSpawnPoint().position;        
+            } */
+            if(tmapColor != pColour){
+                Debug.Log("Working so far");
+                this.transform.position = GameManager.instance.getSpawnPoint().position;
+                Debug.Log(tmapColor.ToHexString());
+                Debug.Log(pColour.ToHexString());
+            }
+        }    
+    } 
 
     private void Flip(){
         Vector3 currentScale = gameObject.transform.localScale; 
