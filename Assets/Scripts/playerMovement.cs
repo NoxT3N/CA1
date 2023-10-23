@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class playerMovement : MonoBehaviour{
 
@@ -11,11 +12,14 @@ public class playerMovement : MonoBehaviour{
     private bool facingRight = true;    
     private bool onGround;
 
+    private playerColourChanger pColourChanger;
+
     
     
     private void Awake(){ 
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        pColourChanger = GetComponent<playerColourChanger>();
     }
 
     void FixedUpdate()
@@ -48,6 +52,14 @@ public class playerMovement : MonoBehaviour{
             anim.SetBool("Jump", false);
             anim.SetBool("Grounded",true);
             
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other){
+        Vector3Int position = other.gameObject.GetComponent<Tilemap>().WorldToCell(transform.position);
+
+        if(other.GetComponent<Tilemap>().GetColor(position) == pColourChanger.pColour){
+
         }
     }
 

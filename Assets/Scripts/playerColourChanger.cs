@@ -24,7 +24,7 @@ public class playerColourChanger : MonoBehaviour
     //UPDATE: instead of destroying the coin now ther's a loop that goes thorugh each coin in the game and disable's it if it's the same colour
 
     private void OnTriggerEnter2D(Collider2D other){
-        for(int i = 0; i < GameObject.Find("Coins").transform.childCount; i++){
+        for(int i = 0; i < GameObject.Find("Coins").transform.childCount; i++){ 
             //Because Find(parentName) checks disabled objects by default I used it to reenablethe coins
             GameObject.Find("Coins").transform.GetChild(i).gameObject.SetActive(true);
         }
