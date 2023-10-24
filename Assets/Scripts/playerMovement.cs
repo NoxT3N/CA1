@@ -75,12 +75,12 @@ public class playerMovement : MonoBehaviour{
                 other.transform.position = GameManager.instance.getSpawnPoint().position;        
             } */
             if(tmapColor != pColour){
-                transform.position = GameManager.instance.getSpawnPoint().position;
+                transform.position = GameManager.instance.getCheckPoint().position;
+                pColourChanger.changePlayerColour(Color.white);
+                pColourChanger.reEnableCoins();
+
                 //Debug.Log("tmap color "+tmapColor.ToHexString());
                 //Debug.Log("player color "+pColour.ToHexString());
-            }
-            else{
-
             }
         }    
     } 

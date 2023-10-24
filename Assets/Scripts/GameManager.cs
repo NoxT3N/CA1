@@ -7,9 +7,9 @@ public class GameManager : MonoBehaviour
 {   
     public static GameManager instance; 
 
-    [Header("Respawm point settings")]
+    [Header("Check point settings")]
     public GameObject player;
-    public Transform spawnPoint;
+    public Transform checkPoint;
    
     // Start is called before the first frame update
     void Awake()
@@ -34,11 +34,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
-    public Transform getSpawnPoint(){
-        return this.spawnPoint;
+    public Transform getCheckPoint(){
+        return this.checkPoint;
+    }
+
+    public void setCheckPoint(Transform newCheckPoint){
+        this.checkPoint = newCheckPoint;
     }
 
     

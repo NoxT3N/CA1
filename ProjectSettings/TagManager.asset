@@ -12,6 +12,7 @@ TagManager:
   - Coin Manager
   - Obstacle
   - Spawn Point
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

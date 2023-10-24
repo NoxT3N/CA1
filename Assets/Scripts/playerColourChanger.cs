@@ -9,7 +9,7 @@ public class playerColourChanger : MonoBehaviour
 {
     [HideInInspector] public Color pColour;
     [HideInInspector] public Color coinColour;
-    private SpriteRenderer playerRender;
+    [HideInInspector] public SpriteRenderer playerRender;
     private GameObject[] coins; 
 
     void Awake(){
@@ -18,9 +18,9 @@ public class playerColourChanger : MonoBehaviour
         coins = GameObject.FindGameObjectsWithTag("Coin");
     }
 
-    /*void Update(){
-        //pColour = playerRender.material.color;
-    }*/
+    void Update(){
+        pColour = playerRender.material.color;
+    }
 
     //when player enters a trigger collider it checks if that collider is tagged as coin
     //if yes then it gets the colour of the coin through its sprite render component
@@ -32,10 +32,8 @@ public class playerColourChanger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other){
         if(other.CompareTag("Coin")){
-            for(int i = 0; i < GameObject.Find("Coins").transform.childCount; i++){ 
-                //Because Find(parentName) checks disabled objects by default I used it to reenablethe coins
-                GameObject.Find("Coins").transform.GetChild(i).gameObject.SetActive(true);
-            }
+            
+            reEnableCoins();
 
             if(other.gameObject.CompareTag("Coin")){
                  coinColour = other.GetComponent<SpriteRenderer>().color;
@@ -47,10 +45,22 @@ public class playerColourChanger : MonoBehaviour
                         }
                         
                     }
-                    playerRender.material.color = coinColour;
+                    changePlayerColour(coinColour);
                 }
                 
             }
         }
+    }
+
+
+    public void reEnableCoins(){
+         for(int i = 0; i < GameObject.Find("Coins").transform.childCount; i++){ 
+                //Because Find(parentName) checks disabled objects by default I used it to reenablethe coins
+                GameObject.Find("Coins").transform.GetChild(i).gameObject.SetActive(true);
+            }
+    }
+
+    public void changePlayerColour(Color newColour){
+        playerRender.material.color = newColour;
     }
 }
