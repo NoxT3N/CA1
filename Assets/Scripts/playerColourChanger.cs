@@ -18,9 +18,9 @@ public class playerColourChanger : MonoBehaviour
         coins = GameObject.FindGameObjectsWithTag("Coin");
     }
 
-    void Update(){
-        pColour = playerRender.material.color;
-    }
+    /*void Update(){
+        //pColour = playerRender.material.color;
+    }*/
 
     //when player enters a trigger collider it checks if that collider is tagged as coin
     //if yes then it gets the colour of the coin through its sprite render component

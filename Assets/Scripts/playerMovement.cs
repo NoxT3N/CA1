@@ -75,10 +75,12 @@ public class playerMovement : MonoBehaviour{
                 other.transform.position = GameManager.instance.getSpawnPoint().position;        
             } */
             if(tmapColor != pColour){
-                Debug.Log("Working so far");
-                this.transform.position = GameManager.instance.getSpawnPoint().position;
-                Debug.Log(tmapColor.ToHexString());
-                Debug.Log(pColour.ToHexString());
+                transform.position = GameManager.instance.getSpawnPoint().position;
+                //Debug.Log("tmap color "+tmapColor.ToHexString());
+                //Debug.Log("player color "+pColour.ToHexString());
+            }
+            else{
+
             }
         }    
     } 
