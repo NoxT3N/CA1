@@ -26,6 +26,8 @@ public class CheckPointController : MonoBehaviour
         if(other.CompareTag("Player")){
             Debug.Log("Checkpoint saved");
             checkpoint.position = transform.position;
+            other.GetComponent<playerColourChanger>().changePlayerColour(Color.white);
+            other.GetComponent<playerColourChanger>().reEnableCoins();
         }
     }
 }

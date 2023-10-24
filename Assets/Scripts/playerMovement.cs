@@ -5,17 +5,23 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class playerMovement : MonoBehaviour{
-
+    
+    [Header("Player settings")]
     public float speed = 10f;
     public float jumpHeight = 7f;
+    public float dashSpeed = 20f;
+    private bool isDashing = false; 
+    //public float jumpCooldownDuration = 0.2f;
+    //private bool canJump = true;
     private Rigidbody2D body;
     private Animator anim;
     private bool facingRight = true;    
     private bool onGround;
-
     private Color pColour;
-
     private playerColourChanger pColourChanger;
+
+    private bool dashInProgress = false;
+    private bool jumpInProgress = false;
 
     
     
@@ -23,6 +29,10 @@ public class playerMovement : MonoBehaviour{
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         pColourChanger = GetComponent<playerColourChanger>();
+    }
+
+    void Start(){
+        transform.position = GameManager.instance.getCheckPoint().position;
     }
 
     void FixedUpdate()
@@ -35,10 +45,14 @@ public class playerMovement : MonoBehaviour{
             Jump();
         }
 
-        if((horizontalInput>0 && !facingRight)||(horizontalInput<0 && facingRight))
-        {
+        if((horizontalInput>0 && !facingRight)||(horizontalInput<0 && facingRight)){
             Flip();
         }
+
+        
+        /*if(Input.GetKey(KeyCode.LeftShift) && !isDashing && !dashInProgress){
+            StartCoroutine(Dash());
+        }*/
 
     }
 
@@ -52,6 +66,25 @@ public class playerMovement : MonoBehaviour{
         anim.SetBool("Grounded",false);
         onGround = false;
     }
+
+    /* IEnumerator jumpCooldown(){
+        canJump = false;
+        yield return new WaitForSeconds(jumpCooldownDuration);
+        canJump = true;
+    }*/
+
+     /*IEnumerator Dash(){
+        float originalSpeed = speed;
+        speed = dashSpeed;
+        isDashing = true;
+        dashInProgress  = true;
+        yield return new WaitForSeconds(0.2f);
+        speed = originalSpeed;
+        isDashing = false;
+        dashInProgress = false;
+        
+     }*/
+
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.CompareTag("Ground")||other.gameObject.CompareTag("Wall")){
