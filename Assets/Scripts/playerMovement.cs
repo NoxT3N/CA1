@@ -9,8 +9,8 @@ public class playerMovement : MonoBehaviour{
     [Header("Player settings")]
     public float speed = 10f;
     public float jumpHeight = 7f;
-    public float dashSpeed = 20f;
-    private bool isDashing = false; 
+    //public float dashSpeed = 20f;
+    //private bool isDashing = false; 
     //public float jumpCooldownDuration = 0.2f;
     //private bool canJump = true;
     private Rigidbody2D body;
@@ -20,8 +20,8 @@ public class playerMovement : MonoBehaviour{
     private Color pColour;
     private playerColourChanger pColourChanger;
 
-    private bool dashInProgress = false;
-    private bool jumpInProgress = false;
+    //private bool dashInProgress = false;
+   // private bool jumpInProgress = false;
 
     
     
