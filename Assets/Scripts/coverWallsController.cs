@@ -5,26 +5,54 @@ using UnityEngine.Tilemaps;
 
 public class coverWallsController : MonoBehaviour
 {
-    
-    public GameObject coverWall;
-    // Start is called before the first frame update
+    //private bool fakeWall;
+    private Color originalColor;
+    private float newAlpha = 0f;
+    private Tilemap fakeWall;
     void Awake()
     {
         //coverWall = GetComponent<GameObject>();
+        fakeWall = GetComponent<Tilemap>();
+        originalColor = fakeWall.color;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        /*if(fakeWall){
+            this.gameObject.SetActive(true);
+        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D other){
         if(other.CompareTag("Player")){
-            coverWall.SetActive(false);
+            //Debug.Log("Inside");
+            //this.gameObject.SetActive(false);
+            //fakeWall = false;
+            Color colour = fakeWall.color;
+            colour.a = newAlpha;
+            fakeWall.color = colour;
+
         }
     }
     private void OnTriggerExit2D(Collider2D other){
-        coverWall.SetActive(true);
+        //Debug.Log("Outside");
+        //this.gameObject.SetActive(true);
+        //fakeWall = true;
+        fakeWall.color = originalColor;
     }
+
+    /*private void  OnCollisionEnter2D(Collision2D other){
+        if(other.gameObject.CompareTag("Player")){
+            Debug.Log("Toasters");
+            coverWall.SetActive(false);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other) {
+         if(other.gameObject.CompareTag("Player")){
+            Debug.Log("Toasters");
+            coverWall.SetActive(true);
+        }
+    }*/
 }
