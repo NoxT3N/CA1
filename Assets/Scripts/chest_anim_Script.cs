@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class chest_anim_Script : MonoBehaviour
 {
@@ -15,5 +16,11 @@ public class chest_anim_Script : MonoBehaviour
         if(other.CompareTag("Player")){
             anim.SetBool("open",true);
         }
+        StartCoroutine(waitForEndGame());  
+    }
+
+    IEnumerator waitForEndGame(){
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("GameOver");
     }
 }
